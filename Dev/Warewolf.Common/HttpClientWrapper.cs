@@ -9,6 +9,7 @@
 */
 
 
+using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Warewolf.Web;
@@ -17,7 +18,10 @@ namespace Warewolf
 {
     public class HttpClientWrapper : IHttpClient
     {
-        readonly HttpClient _httpClient;
+        private bool _disposed = false;
+        private HttpClient _httpClient;
+
+        public bool HasCredentials { get; private set; }
 
         public HttpClientWrapper(HttpClient client, bool hasCredentials)
         {
@@ -25,9 +29,39 @@ namespace Warewolf
             HasCredentials = hasCredentials;
         }
 
-        public void Dispose() => _httpClient.Dispose();
+        public void Dispose()
+        {   
+            // Implement IDisposable.
+            // Do not make this method virtual.
+            // A derived class should not be able to override this method.
+            this.Dispose(true);
+            // This object will be cleaned up by the Dispose method.
+            // Therefore, you should call GC.SupressFinalize to
+            // take this object off the finalization queue
+            // and prevent finalization code for this object
+            // from executing a second time.
+            GC.SuppressFinalize(this);
+        }
 
-        public Task<HttpResponseMessage> GetAsync(string url)
+       
+        protected virtual void Dispose(bool disposing)
+        {
+            // Dispose(bool disposing) executes in two distinct scenarios.
+            // If disposing equals true, the method has been called directly
+            // or indirectly by a user's code. Managed and unmanaged resources
+            // can be disposed.
+            // If disposing equals false, the method has been called by the
+            // runtime from inside the finalizer and you should not reference
+            // other objects. Only unmanaged resources can be disposed.
+
+            if (!this._disposed)
+            {
+                _httpClient.Dispose();
+                _httpClient = null;
+                this._disposed = true;
+            }
+        }
+            public Task<HttpResponseMessage> GetAsync(string url)
         {
             return _httpClient.GetAsync(url);
         }
@@ -37,6 +71,5 @@ namespace Warewolf
             return _httpClient.PostAsync(url,new StringContent(postData));
         }
 
-        public bool HasCredentials { get; private set; }
     }
 }

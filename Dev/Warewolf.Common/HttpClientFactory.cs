@@ -27,8 +27,10 @@ namespace Warewolf.Common
         public IHttpClient New(Uri uri, string userName, string password)
         {
             var baseAddress = uri.GetLeftPart(UriPartial.Authority);
-            var httpClientHandler = new HttpClientHandler();
-            httpClientHandler.UseDefaultCredentials = true;
+            var httpClientHandler = new HttpClientHandler
+            {
+                UseDefaultCredentials = true
+            };
             var hasCredentials = false;
             if (!string.IsNullOrEmpty(userName))
             {
