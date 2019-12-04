@@ -1,4 +1,3 @@
-#pragma warning disable
 /*
 *  Warewolf - Once bitten, there's no going back
 *  Copyright 2019 by Warewolf Ltd <alpha@warewolf.io>
@@ -19,7 +18,7 @@ using System.Runtime.CompilerServices;
 
 [assembly: AssemblyCompany("Warewolf")]
 [assembly: AssemblyProduct("Warewolf")]
-[assembly: AssemblyCopyright("Copyright Warewolf 2017")]
+[assembly: AssemblyCopyright("Copyright Warewolf 2017-2019")]
 
 // Version information for an assembly consists of the following four values:
 //
