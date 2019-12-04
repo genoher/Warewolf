@@ -52,9 +52,10 @@ namespace Warewolf.Driver.RabbitMQ
 
             };
 
-            channel.BasicConsume(queue: rabbitConfig.QueueName,
-                                        noAck: false,
-                                        consumer: eventConsumer);
+            //TODO: CG: CHANGE
+            channel.BasicConsume(queue: rabbitConfig.QueueName, 
+                                 autoAck: false,
+                                 consumer: eventConsumer);
         }
 
         private IModel CreateChannel(RabbitConfig rConfig)

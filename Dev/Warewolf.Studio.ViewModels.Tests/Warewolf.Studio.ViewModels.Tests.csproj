@@ -264,7 +264,7 @@
       <Version>4.7.0.9</Version>
     </PackageReference>
     <PackageReference Include="Moq">
-      <Version>4.8.3</Version>
+      <Version>4.13.1</Version>
     </PackageReference>
     <PackageReference Include="MSTest.TestAdapter">
       <Version>2.0.0</Version>
